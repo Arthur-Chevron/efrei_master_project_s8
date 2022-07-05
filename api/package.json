@@ -1,0 +1,26 @@
+{
+  "name": "tp1",
+  "version": "0.0.1",
+  "description": "example for TP1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "set NODE_ENV=dev && nodemon server.js"
+  },
+  "keywords": [
+    "REST",
+    "MongoDB",
+    "API",
+    "Node"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.17.3",
+    "mongoose": "^6.3.0",
+    "nodemon": "^2.0.15"
+  }
+}
