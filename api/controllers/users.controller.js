@@ -9,8 +9,6 @@ const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken")
 const { Parser } = require("json2csv")
 
-
-
 exports.add = async (req, res) => {
   const firstname = req.body.firstname
   const lastname = req.body.lastname
