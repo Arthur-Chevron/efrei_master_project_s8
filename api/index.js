@@ -22,9 +22,10 @@ app.use(cors(
     }
 ))
 
-
-
 require("./routes/users.route")(app)
+require("./routes/medications.route")(app)
+require("./routes/rappels.route")(app)
+require("./routes/difficulties.route")(app)
 
 mongoose.connect(dbConfig.url, {})
   .then(console.log("connected succed"))

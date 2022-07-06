@@ -13,5 +13,7 @@ module.exports = (app) =>{
 
   router.get('/', isLogged, users.getByToken)
 
+  router.get('/csv', isLogged, users.csv)
+
   app.use("/users", router)
 }

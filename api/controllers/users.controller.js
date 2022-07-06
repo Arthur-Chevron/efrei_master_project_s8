@@ -1,9 +1,13 @@
 const db = require("../models/index.js")
 const Users = db.Users
 const Roles = db.Roles
+const Rappels = db.Rappels
+const Medications = db.Medications
+const Difficulties = db.Difficulties
 
 const bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken")
+const { Parser } = require("json2csv")
 
 
 
@@ -45,6 +49,22 @@ exports.add = async (req, res) => {
       roles: _roles._id
     })
 
+    const result_ = {
+      firstname: firstname,
+      lastname: lastname,
+      birth: birth,
+      email: email,
+      roles: _roles._id
+    }
+
+    // create default rappels
+    const result1 = await Rappels.create({
+      vibror: 0,
+      sonor: 0,
+      led: 0,
+      _uid: result._id
+    })
+
     // connexion valid generation de l'access token and refresh token
     let payload = { _id: result._id }
 
@@ -57,7 +77,8 @@ exports.add = async (req, res) => {
 
     return res.status(200).send({
       message: "User created",
-      result: result,
+      result: result_,
+      result1: result1,
       accessToken: accessToken
     })
 
@@ -148,67 +169,72 @@ exports.findAll = async (req, res) => {
   }
 }
 
-
 exports.getByToken = async (req, res) => {
   const _id = req.userId
 
   try {
     const result = await Users.findById({_id: _id})
-
     if (!result) return res.status(404).send("User doesn't exist")
 
-    return res.status(200).send({message: "See your informations", result: result})
+    const result1 = await Rappels.findOne({_uid: _id})
+    const result2 = await Medications.find({_uid: _id})
+    const result3 = await Difficulties.find({_uid: _id})
+
+    return res.status(200).send({
+      message: "See your informations",
+      result: result,
+      result1: result1,
+      result2: result2,
+      result3: result3
+    })
 
   } catch(err) {
     return res.status(500).send({err: err})
   }
 }
 
-
-/*
-exports.add = async (req, res) => {
-  const brand = req.body.brand
-  const horse_power = req.body.horse_power
-  const num_doors = req.body.num_doors
-  const model = req.body.model
-
-  if (!brand) return res.status(400).send("Brand is required")
-  if (!horse_power) return res.status(400).send("Horse power is required")
-  if (!num_doors) return res.status(400).send("Number of doors is required")
-  if (!model) return res.status(400).send("Model is required")
-  if (horse_power <= 0) return res.status(400).send("Horse power must be greater than 0")
-  if (num_doors <= 0) return res.status(400).send("Car must have at least 1 door")
+exports.csv = async (req, res) => {
+  const _id = req.userId
+  // const csvFields = ["Médicaments", "Nom", "Dosage", "Heure", "Minute", "Vibreur", "Haut-parleur", "LED"]
+  const csvFields = ["Nom", "Vibreur", "Haut-parleur", "LED"]
+  let csvInformations = []
 
   try {
+    const result = await Users.findById({_id: _id})
+    if (!result) return res.status(404).send("User doesn't exist")
 
-    const newCar = {
-      brand: brand,
-      horse_power: horse_power,
-      num_doors: num_doors,
-      model: model
-    }
+    const result1 = await Rappels.findOne({_uid: _id})
+    const result2 = await Medications.find({_uid: _id})
 
-    const addNewCar = await Cars.create(newCar)
-    return res.status(200).send({message: "Add confirm", data: addNewCar})
+    let hour, minutes
+    result2.forEach(medicament => {
+      hour = parseInt(medicament.time)
+      minutes = (medicament.time % 1) * 60
+      
+      csvInformations.push({
+        "Médicaments": medicament.name,
+        "Nom": result.lastname,
+        "Dosage": medicament.dose,
+        "Heure": hour,
+        "Minutes": minutes,
+        "Vibreur": result1.vibror,
+        "Haut-parleur": result1.sonor,
+        "LED": result1.led
+      })
+    })
 
-  } catch (err) {
-    return res.status(500).send({message: "Error", err: err})
-  }
-}*/
+    const csvParser = new Parser({ csvFields })
 
+    const csv = csvParser.parse(csvInformations)
 
-exports.deleteACar = async (req, res) => {
-  const _id = req.query._id
+    res.setHeader("Content-Type", "text/csv")
+    res.setHeader("Content-Disposition", "attachment; filename=tutorials.csv")
+    res.status(200).send(csv)
 
-  if (!_id) return res.status(400).send("_id is required")
-
-  try {
-    const deleteCar = await Cars.findOneAndDelete({_id: _id})
-
-    if (!deleteCar) return res.status(404).send("Car doesn't exist")
-    return res.status(200).send({message: "Delete your car id : " + _id, data: deleteCar})
+    // res.download(csv)
+    
 
   } catch(err) {
-    return res.status(500).send({message: "Error", err: err})
+    return res.status(500).send({err: err})
   }
 }
