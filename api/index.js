@@ -31,5 +31,5 @@ mongoose.connect(dbConfig.url, {})
   .then(console.log("connected succed"))
   .catch(err => { console.log("connection failed", err)})
 
-app.listen(8085,() => { console.log("application running on port 8085") })
+app.listen(8085, () => { console.log("application running on port 8085") })
 
