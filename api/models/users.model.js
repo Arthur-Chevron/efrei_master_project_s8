@@ -1,5 +1,5 @@
 module.exports = (mongoose) => {
-  let schema = mongoose.Schema({
+  const schema = mongoose.Schema({
     firtsname: String,
     lastname: String,
     password : String,
@@ -10,7 +10,8 @@ module.exports = (mongoose) => {
       type: new mongoose.Schema({
         key: Number,
         name: String
-      })
+      }),
+      ref: 'roles'
     } 
   })
 
