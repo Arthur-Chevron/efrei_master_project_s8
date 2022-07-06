@@ -2,8 +2,13 @@
   <div id="app">
     <router-view
       @in-loading="inLoading"
+      @error="showError"
     />
 
+    <Error
+      :open="error.open"
+      :msg="error.msg"
+    />
   </div>
 </template>
 
@@ -13,16 +18,28 @@ export default {
   name: 'App',
 
   components: {
+    Error: () => import('./components/Error')
   },
 
   data: () => ({
-    loading: false
+    loading: false,
+    error: {
+      open: false,
+      msg: ''
+    }
   }),
 
   methods: {
     // when we load data from api
     inLoading(value) {
       this.loading = value
+    },
+
+    showError(value) {
+      this.error.msg = value
+      this.error.open = true
+      console.log(this.error)
+      setTimeout(() => {this.error.open = false}, 3000)
     }
   }
 }
@@ -33,8 +50,6 @@ export default {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
   }
 
   body {
