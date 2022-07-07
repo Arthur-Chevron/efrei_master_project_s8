@@ -46,8 +46,9 @@ export default {
 </script>
 
 <style>
+
   #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -61,12 +62,17 @@ export default {
     --grey: #D1D1D1;
     --grey-dark: #6e6e6e;
     --light-grey: rgba(242,245,245,0.8);
-    --blue-google: #1a73e8;
+    --blue: #0049be;
     --red-google: #d93025;
+    --border: rgba(29,28,29,.3);
   }
 
   .hover:hover {
     cursor: pointer;
+  }
+
+  .canala-deck {
+    font-family: "Canela Deck";
   }
 
 </style>
