@@ -124,16 +124,6 @@
             year: ''
         }),
 
-        created() {
-            this.user.email = 'arthur.chevron4@gmail.com'
-            this.user.password = 'Arthur2000'
-            this.user.firstname = 'Arthur'
-            this.user.lastname = 'Chevron'
-            this.day = 4
-            this.month = 1
-            this.year = 2000
-        },
-
         methods: {
             async signup() {
                 try {
