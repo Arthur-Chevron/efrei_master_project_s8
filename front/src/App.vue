@@ -80,6 +80,7 @@ export default {
     --light-grey: rgba(242,245,245,0.8);
     --blue: #0049be;
     --red-google: #d93025;
+    --green: #2F6C60;
     --border: rgba(29,28,29,.3);
   }
 

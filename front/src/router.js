@@ -8,9 +8,9 @@ const VueBrowser = () => import("./views/Browser")
 const Vue404 = () => import("./views/Error404")
 
 // attribution des paths
-const Login = { path: '/', name: "Login", component: VueLogin}
-const Signup = { path: '/signup', name: "Signup", component: VueSignup}
-const Browser = { path: '/browser', name: "Browser", component: VueBrowser}
+const Login = { path: '/', name: "Login", component: VueLogin, meta: {noAuth: true}}
+const Signup = { path: '/signup', name: "Signup", component: VueSignup, meta: {noAuth: true}}
+const Browser = { path: '/browser', name: "Browser", component: VueBrowser, meta: {requiresAuth: true}}
 const Error = { path: '/:catchAll(.*)', name: "ErrorPage", component: Vue404}
 
 

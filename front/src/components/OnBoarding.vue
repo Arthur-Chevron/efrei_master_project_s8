@@ -157,6 +157,7 @@
                     }
 
                     this.onboard += 1
+                    this.$route.query.on = ''
 
                 } catch(err) {
                     return this.$emit('error', err.response.data.message)
