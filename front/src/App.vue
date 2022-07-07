@@ -3,11 +3,18 @@
     <router-view
       @in-loading="inLoading"
       @error="showError"
+      @on-boarding="showOnBoarding"
     />
 
     <Error
       :open="error.open"
       :msg="error.msg"
+    />
+
+    <OnBoarding
+      :open="onBoarding.open"
+      @error="showError"
+      @on-boarding="showOnBoarding"
     />
   </div>
 </template>
@@ -18,7 +25,8 @@ export default {
   name: 'App',
 
   components: {
-    Error: () => import('./components/Error')
+    Error: () => import('./components/Error'),
+    OnBoarding: () => import('./components/OnBoarding')
   },
 
   data: () => ({
@@ -26,6 +34,10 @@ export default {
     error: {
       open: false,
       msg: ''
+    },
+
+    onBoarding: {
+      open: false
     }
   }),
 
@@ -40,6 +52,10 @@ export default {
       this.error.open = true
       console.log(this.error)
       setTimeout(() => {this.error.open = false}, 3000)
+    },
+
+    showOnBoarding(value) {
+      this.onBoarding.open = value
     }
   }
 }

@@ -144,22 +144,16 @@
                     if(this.day.toString().length === 1) this.day = '0' + this.day
                     if(this.month.toString().length === 1) this.month = '0' + this.month
                     
-                    this.user.birth = `${this.day}/${this.month}/${this.year}`
+                    this.user.birth = `${this.month}/${this.day}/${this.year}`
 
                     const res = await axios.post(
                         process.env.VUE_APP_URL_API + '/users',
                         this.user
                     )
 
-                    this.user.email = 'arthur.chevron4@gmail.com'
-                    this.user.password = 'Arthur2000'
-                    this.user.firstname = 'Arthur'
-                    this.user.lastname = 'Chevron'
-                    this.user.birth = '04/01/2000'
-
                     this.$cookies.set('cookieMOP', res.data.accessToken, "3h", null, process.env.VUE_APP_DOMAIN, process.env.VUE_APP_SECURE_COOKIE)
 
-                    return this.$router.push({path: '/browser'})
+                    return this.$router.push({path: '/browser?on=boarding'})
 
                 } catch(err) {
                     console.log(err)

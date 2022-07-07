@@ -2,6 +2,8 @@
     <div class="browser">
         <p>Bonjour Arthur</p>
         <p>{{ user }}</p>
+
+        
     </div>
 </template>
 
@@ -16,13 +18,14 @@
         }),
 
         async created() {
-            this.getMySelf()
+            await this.getMySelf()
+            if (this.$route.query.on === "boarding") this.$emit('on-boarding', true) 
         },
 
         methods: {
             async getMySelf() {
                 try {
-                    const res = await axios(
+                    const res = await axios.get(
                         process.env.VUE_APP_URL_API + '/users',
                         {
                             headers: {
@@ -34,7 +37,7 @@
                     this.user = res.data.result
 
                 } catch(err) {
-                    return this.$emit('error', err.responsee.data.message)
+                    return this.$emit('error', err.response.data.message)
                 }
             }
         }
