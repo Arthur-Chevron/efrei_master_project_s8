@@ -94,7 +94,7 @@
         flex-direction: column;
         align-items: center;
         padding: 5% 10%;
-        background-image: url('https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg');
+        background-image: url('~@/assets/logo.svg');
     }
 
     .menu__content {

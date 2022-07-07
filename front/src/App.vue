@@ -79,7 +79,7 @@ export default {
     --grey-dark: #6e6e6e;
     --light-grey: rgba(242,245,245,0.8);
     --blue: #0049be;
-    --red-google: #d93025;
+    --red: #b5291f;
     --green: #2F6C60;
     --border: rgba(29,28,29,.3);
   }
@@ -90,6 +90,13 @@ export default {
 
   .canala-deck {
     font-family: "Canela Deck";
+  }
+
+  .line {
+    display: block;
+    margin: 2% 0;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
   }
 
 </style>

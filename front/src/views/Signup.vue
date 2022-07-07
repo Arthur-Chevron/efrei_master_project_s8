@@ -2,7 +2,7 @@
     <div class="signup">
         <img
             class="signup__image"
-            src="https://a.slack-edge.com/bv1-9/slack_logo-ebd02d1.svg"
+            src="~@/assets/logo.svg"
             alt="logo"
         />
         
