@@ -214,7 +214,7 @@ exports.csv = async (req, res) => {
         "Nom": result.lastname,
         "Dosage": medicament.dose,
         "Heure": hour,
-        "Minutes": minutes,
+        "Minutes": parseInt(minutes),
         "Vibreur": result1.vibror,
         "Haut-parleur": result1.sonor,
         "LED": result1.led
