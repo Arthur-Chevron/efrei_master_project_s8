@@ -13,15 +13,6 @@
             </div>
 
             <div
-                v-on:click="$router.push({path: '/browser/medications'})"
-                class="menu__content__tab hover"
-                v-bind:class="{'menu__content__tab-active': $route.path === '/browser/medications'}"
-            >
-
-                <p>Medicaments</p>
-            </div>
-
-            <div
                 v-on:click="$router.push({path: '/browser/difficulties'})"
                 class="menu__content__tab hover"
                 v-bind:class="{'menu__content__tab-active': $route.path === '/browser/difficulties'}"

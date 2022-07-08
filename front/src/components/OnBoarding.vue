@@ -70,7 +70,7 @@
                             class="on-boarding__bory__content__difficulties__input"
                             type="text"
                             v-model="difficulties[1]"
-                            placeholder="Aveugle..."
+                            placeholder="Sourd..."
                             required
                         />
 
@@ -78,7 +78,7 @@
                             class="on-boarding__bory__content__difficulties__input"
                             type="text"
                             v-model="difficulties[2]"
-                            placeholder="Aveugle..."
+                            placeholder="Muet..."
                             required
                         />
 
